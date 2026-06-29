@@ -13,7 +13,7 @@ A lightweight PHP client for the Ollama API.
 ## Installation
 
 ```bash
-composer require ollama/php
+composer require ollama/php --prefer-dist
 ```
 
 ## Usage
