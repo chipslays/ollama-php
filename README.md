@@ -1,10 +1,10 @@
 <h1 align="center">Ollama PHP</h1>
-<center>
+<p align="center">
 A lightweight PHP client for the Ollama API.
-</center>
-<center>
+</p>
+<p align="center">
 🦙 + 🐘 = ❤️
-</center>
+</p>
 
 ---
 
