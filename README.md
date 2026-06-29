@@ -1,7 +1,9 @@
 <h1 align="center">Ollama PHP</h1>
+
 <p align="center">
 A lightweight PHP client for the Ollama API.
 </p>
+
 <p align="center">
 🦙 + 🐘 = ❤️
 </p>
@@ -28,12 +30,12 @@ $response = $ollama->chat()->send([
     ],
 ]);
 
-$response->dd();
+echo $response->message->content;
 ```
 
 ## Examples
 
-See the [examples](/examples) directory.
+You can find usage examples in the [examples](/examples) folder.
 
 ## License
 
