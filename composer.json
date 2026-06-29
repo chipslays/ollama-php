@@ -1,0 +1,44 @@
+{
+    "name": "ollama/php",
+    "description": "A lightweight PHP client for the Ollama API.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["ollama", "php", "client", "api"],
+    "homepage": "https://github.com/chipslays/ollama-php",
+    "support": {
+        "issues": "https://github.com/chipslays/ollama-php/issues",
+        "source": "https://github.com/chipslays/ollama-php"
+    },
+    "require": {
+        "php": "^8.4",
+        "guzzlehttp/guzzle": "^7.12"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "*",
+        "pestphp/pest": "^3.0 || ^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ollama\\": "src/"
+        },
+        "files": [
+            "helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "php vendor/bin/pest"
+    }
+}
