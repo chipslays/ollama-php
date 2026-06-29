@@ -14,8 +14,8 @@
         "guzzlehttp/guzzle": "^7.12"
     },
     "require-dev": {
-        "symfony/var-dumper": "*",
-        "pestphp/pest": "^3.0 || ^4.0"
+        "pestphp/pest": "^3.0 || ^4.0",
+        "symfony/var-dumper": "^8.1"
     },
     "autoload": {
         "psr-4": {

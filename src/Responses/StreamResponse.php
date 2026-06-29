@@ -4,10 +4,11 @@ namespace Ollama\Responses;
 
 use Exception;
 use Generator;
+use IteratorAggregate;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
-class StreamResponse
+class StreamResponse implements IteratorAggregate
 {
     public function __construct(
         protected readonly string $responseClass,

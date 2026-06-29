@@ -148,8 +148,7 @@ class Client
     public function isRunning(): bool
     {
         try {
-            $response = $this->get('/')->getBody()->getContents();
-
+            $response = $this->get('/', parseJson: false)->getBody()->getContents();
             return (strtolower($response) === 'ollama is running');
         } catch (Throwable $e) {
             return false;
