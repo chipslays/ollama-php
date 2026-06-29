@@ -137,7 +137,9 @@ class Client
             ],
         ]);
 
-        return json_decode($response->getBody(), true);
+        $data = json_decode($response->getBody(), true);
+
+        return $data['results'] ?? [];
     }
 
     /**
