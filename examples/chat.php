@@ -7,7 +7,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $ollama = new Ollama;
 
 $response = $ollama->chat()->send([
-    'model' => 'gemma4:12b',
+    'model' => 'ornith:9b-q4_K_M',
     'messages' => [
         ['role' => 'system', 'content' => 'You are a Ollama assistant.'],
         ['role' => 'user', 'content' => 'Hello!'],

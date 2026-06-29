@@ -6,6 +6,6 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $ollama = new Ollama;
 
-$status = $ollama->models()->load('gemma4:12b');
+$status = $ollama->models()->load('ornith:9b-q4_K_M');
 
 echo $status ? 'loaded' : 'failed';
