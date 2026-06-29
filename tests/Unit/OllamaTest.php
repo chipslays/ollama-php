@@ -11,38 +11,38 @@ use Ollama\Http\Client;
 use Ollama\Ollama;
 
 it('has client', function () {
-    $ollama = new Ollama();
+    $ollama = new Ollama;
     $client = $ollama->client();
 
     expect($client)->toBeInstanceOf(Client::class);
 });
 
 it('has blobs', function () {
-    $ollama = new Ollama();
+    $ollama = new Ollama;
 
     expect($ollama->blobs())->toBeInstanceOf(Blobs::class);
 });
 
 it('has chat', function () {
-    $ollama = new Ollama();
+    $ollama = new Ollama;
 
     expect($ollama->chat())->toBeInstanceOf(Chat::class);
 });
 
 it('has completions', function () {
-    $ollama = new Ollama();
+    $ollama = new Ollama;
 
     expect($ollama->completions())->toBeInstanceOf(Completions::class);
 });
 
 it('has embed', function () {
-    $ollama = new Ollama();
+    $ollama = new Ollama;
 
     expect($ollama->embed())->toBeInstanceOf(Embed::class);
 });
 
 it('has models', function () {
-    $ollama = new Ollama();
+    $ollama = new Ollama;
 
     expect($ollama->models())->toBeInstanceOf(Models::class);
 });
