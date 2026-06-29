@@ -4,7 +4,7 @@ namespace Ollama\Responses\Chat;
 
 use Ollama\Responses\AbstractResponse;
 
-class ChatMessageToolCallResponse extends AbstractResponse
+class ChatMessageToolCallFunctionResponse extends AbstractResponse
 {
     protected function __construct(
         public readonly string $name,
