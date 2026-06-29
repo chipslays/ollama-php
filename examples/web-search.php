@@ -6,7 +6,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $ollama = new Ollama;
 
-$results = $ollama->webSearch('php latest version', 5);
+$results = $ollama->webSearch('php latest version', maxResults: 5);
 
 foreach ($results as $item) {
     print_r($item);
