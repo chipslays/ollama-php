@@ -15,7 +15,7 @@ class ChatMessageToolCallResponse extends AbstractResponse
     public static function from(array $attributes): static
     {
         return new static(
-            function: ChatMessageToolCallFunctionResponse::from($attributes['function']),
+            function: ChatMessageToolCallFunctionResponse::from($attributes['function'] ?? $attributes),
         );
     }
 
