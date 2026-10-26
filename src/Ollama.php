@@ -54,6 +54,16 @@ class Ollama extends Client
     }
 
     /**
+     * Alias for `systemOne()` method.
+     *
+     * @return SystemOne
+     */
+    public function decision(): SystemOne
+    {
+        return $this->systemOne();
+    }
+
+    /**
      * Get a models instance.
      *
      * @return Models

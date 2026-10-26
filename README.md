@@ -38,11 +38,11 @@ $response = $ollama->chat()->send([
 echo $response->message->content;
 ```
 
-Here `$response` is a `ChatResponse` instance — `$response->message->content` is a typed `string`, not `$response['message']['content']`. Use this when you want the ergonomics of an SDK.
+Here `$response` is a `ChatResponse` instance - `$response->message->content` is a typed `string`, not `$response['message']['content']`. Use this when you want the ergonomics of an SDK.
 
 ### Using the `Client` directly
 
-If you prefer to talk to Ollama's HTTP API yourself — for example, to hit an endpoint not yet wrapped by the SDK, or to inspect the raw JSON — instantiate `Client` and call `post()` / `get()` / `delete()` yourself. Requests and responses are plain arrays.
+If you prefer to talk to Ollama's HTTP API yourself - for example, to hit an endpoint not yet wrapped by the SDK, or to inspect the raw JSON - instantiate `Client` and call `post()` / `get()` / `delete()` yourself. Requests and responses are plain arrays.
 
 ```php
 use Ollama\Client;
@@ -59,7 +59,7 @@ $result = $client->post('api/chat', [
 var_dump($result);
 ```
 
-This is the same request, but you get the raw associative array back — no DTO, no magic. Use this when you want full control over the payload or need to reach an endpoint the SDK doesn't yet cover.
+This is the same request, but you get the raw associative array back - no DTO, no magic. Use this when you want full control over the payload or need to reach an endpoint the SDK doesn't yet cover.
 
 ## Configuring the client
 
@@ -85,7 +85,7 @@ foreach ($ollama->chat()->stream([/* ... */]) as $chunk) {
 
 ## Examples 👀
 
-Every endpoint has a runnable example in the [`examples`](/examples) directory — from basic chat and completions to streaming, embeddings, and model management. Browse the folder to see each one in context.
+Every endpoint has a runnable example in the [`examples`](/examples) directory - from basic chat and completions to streaming, embeddings, and model management. Browse the folder to see each one in context.
 
 ## License
 

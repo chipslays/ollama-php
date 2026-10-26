@@ -65,15 +65,15 @@ function extractAllContactsLlm(Ollama $ollama, string $htmlOrText): array
                 'role' => 'system',
                 'content' => 'You are a data extractor. You are given raw HTML or text. '
                     . 'Extract ALL email addresses and ALL phone numbers found anywhere '
-                    . 'in the content, including inside scripts, attributes, comments — '
-                    . 'everywhere. Do not filter or judge relevance — extract every single '
+                    . 'in the content, including inside scripts, attributes, comments - '
+                    . 'everywhere. Do not filter or judge relevance - extract every single '
                     . 'one you find, no matter where it appears or what it looks like it\'s for. '
                     . 'Do not invent data that is not present. Remove exact duplicates only. '
                     . 'IMPORTANT: keep the two lists strictly separate. The "emails" array must '
                     . 'contain ONLY strings with an "@" symbol. The "phones" array must contain '
                     . 'ONLY digit sequences with no "@" symbol. Never put the same item in both '
                     . 'arrays, and never put an email in "phones" or a phone number in "emails". '
-                    . 'For each item, also provide a short "context" — whatever surrounding '
+                    . 'For each item, also provide a short "context" - whatever surrounding '
                     . 'text explains what it is (e.g. a label, a nearby sentence, a variable '
                     . 'name it was assigned to). If there is truly nothing nearby that gives '
                     . 'context, leave it as an empty string.',

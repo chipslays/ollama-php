@@ -22,8 +22,8 @@ function buildForecastFormat(): array
             'outcomes' => [
                 'type' => 'array',
                 'description' => 'List of possible outcomes with probabilities. '
-                    . 'For binary questions — two elements (e.g., "Yes"/"No"). '
-                    . 'For multi-option questions — corresponding number of elements. '
+                    . 'For binary questions - two elements (e.g., "Yes"/"No"). '
+                    . 'For multi-option questions - corresponding number of elements. '
                     . 'Sum of all probabilities must equal 100.',
                 'items' => [
                     'type' => 'object',
@@ -134,7 +134,7 @@ function printForecast(array $forecast): void
     );
 }
 
-// Binary question — model determines outcomes
+// Binary question - model determines outcomes
 $forecast1 = forecast($ollama, 'Will the central bank lower its key interest rate at the next meeting?');
 printForecast($forecast1);
 
