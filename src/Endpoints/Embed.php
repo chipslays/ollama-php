@@ -5,16 +5,8 @@ namespace Ollama\Endpoints;
 use Ollama\Http\Client;
 use Ollama\Responses\EmbedResponse;
 
-class Embed
+class Embed extends Endpoint
 {
-    /**
-     * @param Client $client
-     */
-    public function __construct(protected Client $client)
-    {
-        //
-    }
-
     /**
      * Creates vector embeddings representing the input text.
      *
@@ -25,7 +17,7 @@ class Embed
      */
     public function create(array $parameters): EmbedResponse
     {
-        $response = $this->client->post('embed', $parameters, false);
+        $response = $this->client->post('api/embed', $parameters, stream: false);
 
         return EmbedResponse::from($response);
     }

@@ -5,10 +5,10 @@ use Ollama\Ollama;
 
 if (!function_exists('ollama')) {
     function ollama(
-        string $url = Client::DEFAULT_URL,
+        string $url = Client::OLLAMA_HOST_BY_DEFAULT,
         ?string $apiKey = null,
-        array $options = []
+        array $httpOptions = []
     ): Ollama {
-        return new Ollama($url, $apiKey, $options);
+        return new Ollama($url, $apiKey, $httpOptions);
     }
 }

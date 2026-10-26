@@ -12,13 +12,8 @@ use Ollama\Responses\Models\PushModelResponse;
 use Ollama\Responses\Models\ShowModelResponse;
 use Ollama\Responses\StreamResponse;
 
-class Models
+class Models extends Endpoint
 {
-    public function __construct(protected Client $client)
-    {
-        //
-    }
-
     /**
      * Fetch a list of models and their details.
      *
@@ -28,7 +23,7 @@ class Models
      */
     public function all(): AllModelsResponse
     {
-        $response = $this->client->get('tags');
+        $response = $this->client->get('api/tags');
 
         return AllModelsResponse::from($response);
     }
@@ -42,7 +37,7 @@ class Models
      */
     public function running(): RunningModelsResponse
     {
-        $response = $this->client->get('ps');
+        $response = $this->client->get('api/ps');
 
         return RunningModelsResponse::from($response);
     }
@@ -58,7 +53,7 @@ class Models
      */
     public function show(string $modelName, bool $verbose = false): ShowModelResponse
     {
-        $response = $this->client->post('show', [
+        $response = $this->client->post('api/show', [
             'name' => $modelName,
             'verbose' => $verbose,
         ]);
@@ -76,7 +71,7 @@ class Models
      */
     public function create(array $parameters): CreateModelResponse
     {
-        $response = $this->client->post('create', $parameters, false);
+        $response = $this->client->post('api/create', $parameters, stream: false);
 
         return CreateModelResponse::from($response);
     }
@@ -89,7 +84,7 @@ class Models
      */
     public function createWithStream(array $parameters): StreamResponse
     {
-        $response = $this->client->post('create', $parameters, true);
+        $response = $this->client->post('api/create', $parameters, stream: true);
 
         return new StreamResponse(CreateModelResponse::class, $response);
     }
@@ -106,7 +101,7 @@ class Models
     public function copy(string $source, string $destination): bool
     {
         try {
-            $response = $this->client->post('copy', [
+            $response = $this->client->post('api/copy', [
                 'source' => $source,
                 'destination' => $destination,
             ], parseJson: false);
@@ -128,7 +123,7 @@ class Models
     public function delete(string $modelName): bool
     {
         try {
-            $response = $this->client->delete('delete', [
+            $response = $this->client->delete('api/delete', [
                 'name' => $modelName,
             ]);
 
@@ -149,7 +144,7 @@ class Models
      */
     public function pull(string $modelName, bool $insecure = false): PullModelResponse
     {
-        $response = $this->client->post('pull', [
+        $response = $this->client->post('api/pull', [
             'name' => $modelName,
             'insecure' => $insecure,
         ]);
@@ -166,10 +161,10 @@ class Models
      */
     public function pullWithStream(string $modelName, bool $insecure = false): StreamResponse
     {
-        $response = $this->client->post('pull', [
+        $response = $this->client->post('api/pull', [
             'name' => $modelName,
             'insecure' => $insecure,
-        ], true);
+        ], stream: true);
 
         return new StreamResponse(PullModelResponse::class, $response);
     }
@@ -185,7 +180,7 @@ class Models
      */
     public function push(string $modelName, bool $insecure = false): PushModelResponse
     {
-        $response = $this->client->post('push', [
+        $response = $this->client->post('api/push', [
             'name' => $modelName,
             'insecure' => $insecure,
         ]);
@@ -202,10 +197,10 @@ class Models
      */
     public function pushWithStream(string $modelName, bool $insecure = false): StreamResponse
     {
-        $response = $this->client->post('push', [
+        $response = $this->client->post('api/push', [
             'name' => $modelName,
             'insecure' => $insecure,
-        ], true);
+        ], stream: true);
 
         return new StreamResponse(PushModelResponse::class, $response);
     }
@@ -218,7 +213,7 @@ class Models
      */
     public function load(string $modelName): bool
     {
-        $response = $this->client->post('generate', [
+        $response = $this->client->post('api/generate', [
             'model' => $modelName,
         ]);
 
@@ -233,7 +228,7 @@ class Models
      */
     public function unload(string $modelName): bool
     {
-        $response = $this->client->post('generate', [
+        $response = $this->client->post('api/generate', [
             'model' => $modelName,
             'keep_alive' => 0,
         ]);

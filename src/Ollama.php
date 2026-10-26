@@ -7,36 +7,20 @@ use Ollama\Endpoints\Blobs;
 use Ollama\Endpoints\Chat;
 use Ollama\Endpoints\Completions;
 use Ollama\Endpoints\Models;
+use Ollama\Endpoints\SystemOne;
 use Ollama\Http\Client;
+use RuntimeException;
 
-class Ollama
+class Ollama extends Client
 {
     /**
-     * @var Client
-     */
-    protected Client $client;
-
-    /**
-     * @param string $url
-     * @param string|null $apiKey
-     * @param array $options
-     */
-    public function __construct(
-        string $url = Client::DEFAULT_URL,
-        ?string $apiKey = null,
-        array $options = []
-    ) {
-        $this->client = new Client($url, $apiKey, $options);
-    }
-
-    /**
-     * Get a client instance.
+     * Get a client instance (backward compatibility).
      *
      * @return Client
      */
     public function client(): Client
     {
-        return $this->client;
+        return $this;
     }
 
     /**
@@ -46,7 +30,7 @@ class Ollama
      */
     public function completions(): Completions
     {
-        return new Completions($this->client);
+        return new Completions($this);
     }
 
     /**
@@ -56,7 +40,17 @@ class Ollama
      */
     public function chat(): Chat
     {
-        return new Chat($this->client);
+        return new Chat($this);
+    }
+
+    /**
+     * Get a system one instance.
+     *
+     * @return SystemOne
+     */
+    public function systemOne(): SystemOne
+    {
+        return new SystemOne($this);
     }
 
     /**
@@ -66,7 +60,7 @@ class Ollama
      */
     public function models(): Models
     {
-        return new Models($this->client);
+        return new Models($this);
     }
 
     /**
@@ -76,7 +70,7 @@ class Ollama
      */
     public function blobs(): Blobs
     {
-        return new Blobs($this->client);
+        return new Blobs($this);
     }
 
     /**
@@ -86,36 +80,23 @@ class Ollama
      */
     public function embed(): Embed
     {
-        return new Embed($this->client);
+        return new Embed($this);
     }
 
     /**
      * Get the Ollama version.
      *
      * @return string
-     * */
+     * @throws RuntimeException
+     */
     public function version(): string
     {
-        return $this->client->get('version')['version'];
-    }
+        $data = $this->get('version');
 
-    /**
-     * @see https://docs.ollama.com/capabilities/web-search
-     *
-     * @param string $query
-     * @param integer $maxResults
-     * @return array
-     */
-    public function webSearch(string $query, int $maxResults = 5): array
-    {
-        return $this->client->webSearch($query, $maxResults);
-    }
+        if (!is_array($data) || !isset($data['version']) || !is_string($data['version'])) {
+            throw new RuntimeException('Unexpected response from Ollama when fetching version.');
+        }
 
-    /**
-     * @return boolean
-     */
-    public function isRunning(): bool
-    {
-        return $this->client->isRunning();
+        return $data['version'];
     }
 }

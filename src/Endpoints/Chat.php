@@ -6,13 +6,8 @@ use Ollama\Http\Client;
 use Ollama\Responses\Chat\ChatResponse;
 use Ollama\Responses\StreamResponse;
 
-class Chat
+class Chat extends Endpoint
 {
-    public function __construct(protected Client $client)
-    {
-        //
-    }
-
     /**
      * Generate the next chat message in a conversation between a user and an assistant.
      *
@@ -23,7 +18,7 @@ class Chat
      */
     public function send(array $parameters): ChatResponse
     {
-        $response = $this->client->post('chat', $parameters, false);
+        $response = $this->client->post('api/chat', $parameters, stream: false);
 
         return ChatResponse::from($response);
     }
@@ -36,7 +31,7 @@ class Chat
      */
     public function stream(array $parameters): StreamResponse
     {
-        $response = $this->client->post('chat', $parameters, true);
+        $response = $this->client->post('api/chat', $parameters, stream: true);
 
         return new StreamResponse(ChatResponse::class, $response);
     }

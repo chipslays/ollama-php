@@ -12,7 +12,7 @@ class Client
     /**
      * @var string
      */
-    public const string DEFAULT_URL = 'http://127.0.0.1:11434';
+    public const string OLLAMA_HOST_BY_DEFAULT = 'http://127.0.0.1:11434';
 
     /**
      * @var HttpClient
@@ -20,16 +20,16 @@ class Client
     protected HttpClient $httpClient;
 
     /**
-     * @param string $url
+     * @param string $host
      * @param string|null $apiKey
-     * @param array $options
+     * @param array $httpOptions
      */
     public function __construct(
-        protected string $url = self::DEFAULT_URL,
+        protected string $host = self::OLLAMA_HOST_BY_DEFAULT,
         protected ?string $apiKey = null,
-        protected array $options = []
+        protected array $httpOptions = []
     ) {
-        $this->url = rtrim($url, '/');
+        $this->host = rtrim($host, '/');
 
         if ($this->apiKey === null) {
             $this->apiKey = $_ENV['OLLAMA_API_KEY'] ?? null;
@@ -44,11 +44,11 @@ class Client
     protected function getHttpOptions(): array
     {
         $defaultOptions = [
-            'connect_timeout' => 10,
+            'connect_timeout' => 30,
         ];
 
-        $options = array_replace_recursive($defaultOptions, $this->options);
-        $options['base_uri'] = $this->url . '/api/';
+        $options = array_replace_recursive($defaultOptions, $this->httpOptions);
+        $options['base_uri'] = $this->host;
 
         if ($this->apiKey !== null) {
             $options['headers'] = ['Authorization' => 'Bearer ' . $this->apiKey];
@@ -126,7 +126,7 @@ class Client
         }
 
         $options = $this->getHttpOptions();
-        $options['base_uri'] = 'https://ollama.com/api/';
+        $options['base_uri'] = 'https://ollama.com/';
 
         $client = new HttpClient($options);
 
